@@ -1,11 +1,8 @@
 import React from 'react'
 import {List} from 'react-virtualized'
+import { list } from '../data/articles'
 
-const list = [
-  "One item",
-  "Two Item",
-  "three Item"
-]
+
 
 function rowRenderer ({
   key,         // Unique key within array of rows
@@ -15,9 +12,9 @@ function rowRenderer ({
   style        // Style object to be applied to row (to position it)
 }) {
   return (
-    <div
+    <div 
       key={key}
-      style={style}
+      style={{border: '1px solid black', textAlign: 'left'}}
     >
       {list[index]}
     </div>
@@ -30,7 +27,7 @@ const Articles = () => (
   <List
     height={480}
     width={640}
-    rowHeight={20}
+    rowHeight={25}
     rowCount={list.length}
     rowRenderer={rowRenderer}
   />
