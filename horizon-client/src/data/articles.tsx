@@ -1,9 +1,22 @@
 import faker from 'faker'
+import moment from 'moment'
+
+interface Article {
+    date: string,
+    title: string,
+    description: string,
+    hyperlink: string
+}
 
 function articles(times: number) {
-    let list: string[] = []
+    let list: Article[] = []
     for (let i = 0; i < times; i++) {
-        list.push(faker.lorem.sentence())
+        let date = moment(faker.date.recent()).format('DD/MM/YYYY')
+        let title = faker.lorem.sentence()
+        let description = faker.lorem.sentences()
+        let hyperlink = faker.internet.url()
+        let article = {date, title, description, hyperlink}
+        list.push(article)
     }
     return list
 }

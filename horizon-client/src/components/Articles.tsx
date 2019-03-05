@@ -1,8 +1,8 @@
 import React from 'react'
-import {List} from 'react-virtualized'
+import {Table, Column} from 'react-virtualized'
 import { list } from '../data/articles'
 
-
+console.table(list)
 
 function rowRenderer ({
   key,         // Unique key within array of rows
@@ -14,7 +14,7 @@ function rowRenderer ({
   return (
     <div 
       key={key}
-      style={{border: '1px solid black', textAlign: 'left'}}
+      style={{border: '1px solid black', textAlign: 'left', padding: '1px'}}
     >
       {list[index]}
     </div>
@@ -24,13 +24,25 @@ function rowRenderer ({
 
 const Articles = () => (
   <div>
-  <List
-    height={480}
-    width={640}
-    rowHeight={25}
+  <Table
+    headerHeight={30}
+    height={800}
+    width={500} //TODO add functions to calculate the correct height and widths
     rowCount={list.length}
-    rowRenderer={rowRenderer}
-  />
+    rowHeight={20}
+    rowGetter={(idx)=> {return "Some data"}}
+  >
+    <Column 
+      dataKey="date"
+      width={60}
+      label="Date"
+    />  
+    <Column 
+      dataKey="title"
+      width={60}
+      label="Title"
+    />  
+  </Table>
   
   </div>
 );

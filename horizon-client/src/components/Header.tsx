@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Header = () => (
-    <div>
+    <div style={{paddingBottom: '3px'}}>
       Horizon
     </div>
     )
