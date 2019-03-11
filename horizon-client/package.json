@@ -9,8 +9,8 @@
     "@types/react-dom": "16.8.2",
     "@types/react-virtualized": "^9.18.12",
     "moment": "^2.24.0",
-    "react": "^16.8.3",
-    "react-dom": "^16.8.3",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
     "react-scripts": "2.1.5",
     "react-virtualized": "^9.21.0",
     "react-window": "^1.6.2",
@@ -33,5 +33,14 @@
   ],
   "devDependencies": {
     "faker": "^4.1.0"
+  },
+  
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,json,css,md}": ["prettier --write", "git add"]
   }
 }
