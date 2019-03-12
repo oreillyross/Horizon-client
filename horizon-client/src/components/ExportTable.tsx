@@ -1,8 +1,6 @@
 import React from 'react'
-import { list } from '../data/articles'
 import XLSX from 'xlsx'
-
-
+import  styled  from 'styled-components'
 
 
 const writeTheFile = () => {
@@ -13,19 +11,23 @@ const writeTheFile = () => {
   
 }
 
-const ExportTable = () => (
-  <div>
+const ExportTable = ({articles}) => (
+  <div style={{paddingTop: '2em'}}>
     <table id='article_table'>
     <tbody>
-    <tr>
+    <tr style={{textAlign: 'left'}}>
       <th>Date</th>
       <th>Title</th>
+      <th> Description </th>
+      <th> Hyperlink </th>
     </tr>
-    
-    {list.map(article => (
-      <tr key={article.title}>
+  
+    {articles.map(article => (
+      <tr style={{textAlign: 'left'}} key={article.title}>
         <td> {article.date}</td>
         <td> {article.title}</td>
+        <td> {article.description}</td>
+        <td> {article.hyperlink}</td>
       </tr>
     )) }
     </tbody>
