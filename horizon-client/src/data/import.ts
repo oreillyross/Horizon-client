@@ -1,5 +1,6 @@
 import { list } from './articles'
 import cheerio from 'cheerio'
+import request from 'request'
 
 interface Article {
     date: string,
@@ -10,7 +11,7 @@ interface Article {
 
 function getCurrentData() {
     
-    const $ = cheerio.load('http://nna-leb.gov.lb/en')
+
     
 
    return list

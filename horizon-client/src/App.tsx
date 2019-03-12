@@ -12,8 +12,6 @@ function App( props ) {
   const [articles, setArticles] = useState(getCurrentData())  
   
   function refreshClick() {
-    console.log('articles', articles)
-    console.log('getCurrentData',getCurrentData())
     setArticles(getCurrentData())
   }
   
