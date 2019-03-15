@@ -1,6 +1,7 @@
 import React from 'react'
 import XLSX from 'xlsx'
 import  styled  from 'styled-components'
+import moment from 'moment'
 
 
 const writeTheFile = () => {
@@ -11,7 +12,7 @@ const writeTheFile = () => {
   
 }
 
-const ExportTable = ({articles}) => (
+const ExportTable = ({articles, onRemove}) => (
   <div style={{paddingTop: '2em'}}>
     <table id='article_table'>
     <tbody>
@@ -22,12 +23,13 @@ const ExportTable = ({articles}) => (
       <th> Hyperlink </th>
     </tr>
   
-    {articles.map(article => (
-      <tr style={{textAlign: 'left'}} key={article.title}>
-        <td> {article.date}</td>
-        <td> {article.title}</td>
-        <td> {article.description}</td>
-        <td> {article.hyperlink}</td>
+    {articles.map((article, index) => (
+      <tr style={{textAlign: 'left'}} key={article.title + index}>
+        <td style={{width: '12%'}}> {(article.date) ? moment(article.date).format('D/M/Y') : new Date().toUTCString()}</td>
+        <td style={{width: '30%', valign: 'top'}}> {article.title}</td>
+        <td style={{width: '50%'}}> {article.description}</td>
+        <td style={{width: '8%'}}> {article.href}</td>
+        <td><button onClick={() => onRemove(article.id)}>Remove</button></td>
       </tr>
     )) }
     </tbody>

@@ -4,10 +4,22 @@ import './index.css';
 import 'react-virtualized/styles.css'
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { ApolloProvider } from "react-apollo";
+import ApolloClient from "apollo-boost";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const client = new ApolloClient({
+  uri: "https://horizon-server-oreillyross.c9users.io/"
+});
+
+ReactDOM.render(<ApolloProvider client={client}>
+                  <App />
+                </ApolloProvider>  
+                  , document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: http://bit.ly/CRA-PWA
 serviceWorker.unregister();
+
+
+
