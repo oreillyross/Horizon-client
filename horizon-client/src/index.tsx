@@ -6,6 +6,13 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { ApolloProvider } from "react-apollo";
 import ApolloClient from "apollo-boost";
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEnvelope, faEnvelopeOpen } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faEnvelope, faEnvelopeOpen)
+
+
 
 const client = new ApolloClient({
   uri: "https://horizon-server-oreillyross.c9users.io/"

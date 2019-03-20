@@ -10,15 +10,18 @@ import gql from 'graphql-tag'
 
 const ARTICLES = gql`
   query {
-    articles {
+    articles(orderBy: date_DESC) {
       title
       description
       date
       href
       id
+      read
     }
   }
 `
+
+
 
 function App( props ) {
   
@@ -57,7 +60,10 @@ function App( props ) {
           setArticles(data.articles)
         }
         
-        return <ExportTable articles={articles} onRemove={remove}/>  
+        return (
+          <ExportTable articles={articles} onRemove={remove} />  
+
+        )
       }}  
       
     
