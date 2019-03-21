@@ -6,12 +6,12 @@ const StyledHeader = styled.h1`
   padding-bottom: '3px'
 `
 
-const Header = ({refreshClick}) => (
+const Header = () => (
     <div>
     <StyledHeader>
       Horizon
     </StyledHeader>
-    <button style={{float: 'right'}} onClick={refreshClick}>Refresh</button>
+    
     </div>
     )
     

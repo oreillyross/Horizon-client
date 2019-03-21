@@ -9,6 +9,10 @@ import ApolloClient from "apollo-boost";
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faEnvelopeOpen } from '@fortawesome/free-solid-svg-icons'
+import { Router } from "react-router-dom"
+import createHistory from 'history/createBrowserHistory'
+
+const history = createHistory()
 
 library.add(faEnvelope, faEnvelopeOpen)
 
@@ -18,9 +22,10 @@ const client = new ApolloClient({
   uri: "https://horizon-server-oreillyross.c9users.io/"
 });
 
-ReactDOM.render(<ApolloProvider client={client}>
+ReactDOM.render(<Router history={history}><ApolloProvider client={client}>
                   <App />
                 </ApolloProvider>  
+                </Router>
                   , document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
