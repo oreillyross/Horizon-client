@@ -1,6 +1,6 @@
 import * as React from 'react'
 import styled from 'styled-components'
-
+import { Link } from 'react-router-dom'
 
 
 const StyledSubHeader = styled.div`
@@ -13,7 +13,11 @@ const StyledSubHeader = styled.div`
 const SubHeader = () => {
     return (
       <StyledSubHeader>
-        Home    /    Scenarios    /    Indicators    /    Articles    /    Keywords 
+        Home {  } /  {  }  
+        <Link to='/scenarios'>Scenarios</Link>    /
+        Indicators    /
+        <Link to='/articles'>Articles</Link>    /
+        <Link to='/keywords'> Keywords </Link>
         
       </StyledSubHeader>
     )
