@@ -28,17 +28,15 @@ const Articles = () => {
    } ])
   
 
-  const refreshClick = (e) => {
-    console.log('clicked refresh')
-  }
+  
   
   const remove = (id) => {
-      console.log(articles.length)
+      
       const newArticles = articles.filter((o, i) => {
         return id != o.id
       })
       setArticles(newArticles)
-      console.log(newArticles.length)
+     
   }
     
     

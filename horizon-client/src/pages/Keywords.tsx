@@ -35,7 +35,7 @@ const StyledGrid = styled.div`
 
 const StyledKeywords = styled.div`
   padding: 1.2em;
-  border: 1px solid DarkGreen;
+
 `
 
 
@@ -76,8 +76,69 @@ const Keyword = ({keyword}) => {
         
         }
 
+const StyledTextBox = styled.div`
+  margin: 10px;
+  display: flex;
+`
+const StyledInput = styled.input`
+  flex: 1;
+  padding: .25em;
+`
+
+const ADD_KEYWORD = gql`
+  mutation createKeyword($name: String) { 
+  createKeyword(data: {name: $name}) {
+    id
+    name
+  }
+} 
+`
+
+const AddKeywordTextBox = () => {
+    
+    
+    const [keyword, setKeyword] = React.useState('')
+    
+    return (
+      <StyledTextBox>
+        <Mutation 
+          mutation={ADD_KEYWORD}
+          update={(cache, {data: {createKeyword}}) => {
+                    const keywords = cache.readQuery({query: KEYWORDS})
+                    const newKeywords = keywords['keywords'].concat([createKeyword])
+                    cache.writeQuery({query: KEYWORDS, data: {keywords: newKeywords}})
+                }}
+        
+        >
+        {(createKeyword, { data }) => {
+            
+            return (
+              <StyledInput type='text' 
+                         placeholder='Type here to add a keyword' 
+                         value={keyword} 
+                         onChange={e => setKeyword(e.target.value)}
+                         onKeyDown={e => {
+                             if (e.keyCode === 13) {
+                                createKeyword({variables: {name: e.target.value}}) 
+                                setKeyword('')
+                             }
+                         }
+                             
+                         }
+            />
+            )
+        }}
+            
+        </Mutation>    
+      </StyledTextBox>
+      
+    )
+}
+
 const Keywords = () => {
     return (
+      <div>
+      <AddKeywordTextBox />
       <StyledKeywords> 
           <StyledGrid columns='equal'>
             <Query query={KEYWORDS}>
@@ -98,6 +159,7 @@ const Keywords = () => {
             </Query>
           </StyledGrid>
       </StyledKeywords>
+      </div>
     )
 }
 

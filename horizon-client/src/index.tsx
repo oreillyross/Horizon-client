@@ -8,13 +8,13 @@ import { ApolloProvider } from "react-apollo";
 import ApolloClient from "apollo-boost";
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEnvelope, faEnvelopeOpen } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope, faEnvelopeOpen, faTags, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { Router } from "react-router-dom"
 import { createBrowserHistory  } from 'history'
 
 const history = createBrowserHistory()
 
-library.add(faEnvelope, faEnvelopeOpen)
+library.add(faEnvelope, faEnvelopeOpen, faTags, faTrash)
 
 
 

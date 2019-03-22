@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
 import './ExportTable.css'
+import KeywordModal from './KeywordModal'
 
 const writeTheFile = () => {
   let table = document.querySelector('#article_table')
@@ -21,6 +22,11 @@ const UPDATE_READ = gql`
     read
   }
 }
+`
+
+const StyledTags = styled.div`
+  margin-top: 0.5em;
+  text-align: center;
 `
 
 const ArticleRow = ({article, onRemove}) => {
@@ -57,7 +63,17 @@ const ArticleRow = ({article, onRemove}) => {
           <td style={{width: '30%', valign: 'top'}}> {article.title}</td>
           <td style={{width: '50%'}}> {article.description}</td>
           <td style={{width: '4%'}}> {article.href}</td>
-          <td><button onClick={() => onRemove(article.id)}>Remove</button></td>
+          <td>
+            <div>
+              <span onClick={() => onRemove(article.id)}>
+                <FontAwesomeIcon icon='trash' />
+              </span>
+                
+            </div>
+            <StyledTags>
+              <FontAwesomeIcon icon='tags' />
+            </StyledTags>
+          </td>
     </tr>  
   )
 }
@@ -65,6 +81,7 @@ const ArticleRow = ({article, onRemove}) => {
 
 const ExportTable = ({articles, onRemove}) => (
   <div style={{paddingTop: '2em'}}>
+    <KeywordModal/>
     <table id='article_table'>
     <tbody>
     <tr style={{textAlign: 'left'}}>
