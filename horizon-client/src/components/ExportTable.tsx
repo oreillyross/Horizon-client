@@ -24,6 +24,15 @@ const UPDATE_READ = gql`
 }
 `
 
+const DELETE_ARTICLE = gql`
+  mutation deleteArticle($id: ID) {
+   deleteArticle(where: {id: $id}) {
+    id
+    title
+  }
+}
+`
+
 const StyledTags = styled.div`
   margin-top: 0.5em;
   text-align: center;
@@ -65,9 +74,18 @@ const ArticleRow = ({article, onRemove, onTagModal}) => {
           <td style={{width: '4%'}}> {article.href}</td>
           <td>
             <div>
-              <span onClick={() => onRemove(article.id)}>
-                <FontAwesomeIcon icon='trash' />
-              </span>
+              <Mutation mutation={DELETE_ARTICLE}>
+                {(deleteArticle, { data }) => {
+                  return (  <span onClick={() => {
+                    deleteArticle({variables: {id: article.id}})
+                    onRemove(article.id)  
+                  }}>
+                               <FontAwesomeIcon icon='trash' />
+                            </span>  
+                          )
+                }}
+                
+              </Mutation>  
                 
             </div>
             <StyledTags>
