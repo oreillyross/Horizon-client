@@ -12,6 +12,10 @@ const ARTICLES = gql`
       href
       id
       read
+      keywords {
+        id
+        name
+      }
     }
   }
 `
@@ -20,9 +24,9 @@ const ARTICLES = gql`
 const Articles = () => {
     
      const [articles, setArticles] = React.useState([
-   {"title":"Politicians commemorate March 14 anniversary","description":"",
-    "source":"Daily Star",
-    "href":"https://www.dailystar.com.lb/News/Lebanon-News/2019/Mar-14/478808-politicians-mark-march-14-anniversary.ashx",
+   {"title":"",
+    "source":"",
+    "href":"",
     "date":"2019-03-14T14:34:52.019Z",
     "id": "123456789" 
    } ])

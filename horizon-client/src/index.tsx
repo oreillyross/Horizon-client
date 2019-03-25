@@ -5,12 +5,20 @@ import 'react-virtualized/styles.css'
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { ApolloProvider } from "react-apollo";
+import { SchemaLink } from 'apollo-link-schema';
 import ApolloClient from "apollo-boost";
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faEnvelopeOpen, faTags, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { Router } from "react-router-dom"
 import { createBrowserHistory  } from 'history'
+
+
+// const executableSchema = makeExecutableSchema({
+//   typeDefs,
+//   resolvers,
+// });
+// const link = new SchemaLink({ schema: executableSchema });
 
 const history = createBrowserHistory()
 

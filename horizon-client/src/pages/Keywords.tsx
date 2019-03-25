@@ -4,17 +4,9 @@ import styled from 'styled-components'
 import { Query, Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
 import Chip from '@material-ui/core/Chip';
+import KeywordModal from '../components/KeywordModal'
 
 
-
-const KEYWORDS = gql`
-  query {
-      keywords(orderBy: name_ASC ) {
-          id
-          name
-      }
-  }
-`
 
 const REMOVE_KEYWORD = gql`
   mutation removeKeyword($id: ID) {
@@ -25,19 +17,14 @@ const REMOVE_KEYWORD = gql`
 }
 `
 
-const StyledGrid = styled.div`
-  padding: 10px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  grid-gap: 10px;
-
+const KEYWORDS = gql`
+  query {
+      keywords(orderBy: name_ASC ) {
+          id
+          name
+      }
+  }
 `
-
-const StyledKeywords = styled.div`
-  padding: 1.2em;
-
-`
-
 
 const Keyword = ({keyword}) => {
 
@@ -48,7 +35,7 @@ const Keyword = ({keyword}) => {
        const handleDelete = (e) => {
            alert('deleted')
        }    
-        
+        console.log(keyword)
         return (
               <Mutation 
                 mutation={REMOVE_KEYWORD}
@@ -75,6 +62,22 @@ const Keyword = ({keyword}) => {
         )
         
         }
+
+
+
+const StyledGrid = styled.div`
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  grid-gap: 10px;
+
+`
+
+const StyledKeywords = styled.div`
+  padding: 1.2em;
+
+`
+
 
 const StyledTextBox = styled.div`
   margin: 10px;
@@ -136,8 +139,12 @@ const AddKeywordTextBox = () => {
 }
 
 const Keywords = () => {
+    
+    const [keywords, setKeywords] = React.useState([])
+    
     return (
       <div>
+      
       <AddKeywordTextBox />
       <StyledKeywords> 
           <StyledGrid columns='equal'>
@@ -145,8 +152,9 @@ const Keywords = () => {
               {({loading, error, data}) => {
                   if (loading) return <div> Loading .... </div>
                   if (error) return <div> Error :( </div>
-
-                return data.keywords.map(keyword => {
+                  setKeywords(data.keywords)
+                  console.log(keywords)
+                return keywords.map(keyword => {
                         return (
                           <div style={{textAlign: 'left'}} key={keyword.id}>
                             <Keyword keyword={keyword}/>

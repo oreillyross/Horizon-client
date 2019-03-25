@@ -29,7 +29,7 @@ const StyledTags = styled.div`
   text-align: center;
 `
 
-const ArticleRow = ({article, onRemove}) => {
+const ArticleRow = ({article, onRemove, onTagModal}) => {
   
   const [read, setToggle] = useState(article.read) 
   
@@ -71,7 +71,9 @@ const ArticleRow = ({article, onRemove}) => {
                 
             </div>
             <StyledTags>
-              <FontAwesomeIcon icon='tags' />
+              <span onClick={() => onTagModal(article)}>
+                <FontAwesomeIcon icon='tags' />
+              </span>  
             </StyledTags>
           </td>
     </tr>  
@@ -79,35 +81,52 @@ const ArticleRow = ({article, onRemove}) => {
 }
 
 
-const ExportTable = ({articles, onRemove}) => (
-  <div style={{paddingTop: '2em'}}>
-    <KeywordModal/>
-    <table id='article_table'>
-    <tbody>
-    <tr style={{textAlign: 'left'}}>
-      <th>Read</th>
-      <th>Date</th>
-      <th>Title</th>
-      <th> Description </th>
-      <th> Hyperlink </th>
-    </tr>
-    
-   {articles.map(a => {
-    
-     return (
-       (<ArticleRow key={a.id} onRemove={onRemove} article={a} />))}
-     )
-   }
-   
-   
-    
-    </tbody>
-    </table>
-  <div> 
-  <button onClick={writeTheFile}>Export Data</button> 
-  </div>
-  </div>
+const ExportTable = ({articles, onRemove}) => {
   
-);
+  const [modalOpen, setModalOpen] = React.useState(false)
+  const [modalArticle, setModalArticle] = React.useState({})
+   
+  const openModal = (article) => {
+    setModalArticle(article)
+    setModalOpen(true)
+  }
+  
+  const closeModal = () => {
+    setModalOpen(false)
+  }
+  
+
+  
+  return (
+      <div style={{paddingTop: '2em'}}>
+        <KeywordModal modalArticle={modalArticle} openState={modalOpen} handleClose={closeModal}/>
+        <table id='article_table'>
+        <tbody>
+        <tr style={{textAlign: 'left'}}>
+          <th>Read</th>
+          <th>Date</th>
+          <th>Title</th>
+          <th> Description </th>
+          <th> Hyperlink </th>
+        </tr>
+        
+       {articles.map(a => {
+        
+         return (
+           (<ArticleRow key={a.id} onRemove={onRemove} article={a} onTagModal={openModal} />))}
+         )
+       }
+       
+       
+        
+        </tbody>
+        </table>
+      <div> 
+      <button onClick={writeTheFile}>Export Data</button> 
+      </div>
+      </div>
+      
+    );
+}
 
 export default ExportTable
