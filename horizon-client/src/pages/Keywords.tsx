@@ -35,7 +35,7 @@ const Keyword = ({keyword}) => {
        const handleDelete = (e) => {
            alert('deleted')
        }    
-        console.log(keyword)
+        
         return (
               <Mutation 
                 mutation={REMOVE_KEYWORD}
@@ -153,7 +153,7 @@ const Keywords = () => {
                   if (loading) return <div> Loading .... </div>
                   if (error) return <div> Error :( </div>
                   setKeywords(data.keywords)
-                  console.log(keywords)
+                  
                 return keywords.map(keyword => {
                         return (
                           <div style={{textAlign: 'left'}} key={keyword.id}>

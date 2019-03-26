@@ -2,7 +2,18 @@ import * as React from 'react'
 import Modal from '@material-ui/core/Modal';
 import styled from 'styled-components'
 import Keywords from '../pages/Keywords'
-import Downshift from 'downshift'
+import { Query } from 'react-apollo'
+import gql from 'graphql-tag'
+import Autosuggest from 'react-autosuggest';
+
+const KEYWORDS = gql`
+  query {
+      keywords(orderBy: name_ASC ) {
+          id
+          name
+      }
+  }
+`
 
 const StyledModal = styled.div`
     width: 50%;
@@ -27,11 +38,6 @@ const StyledInnerModal = styled.div`
   padding: 20px;
    
 `
-const items = [
-  {name: 'Hariri'},
-  {name: 'Lebanon'},
-  {name: 'Rifi'},
-]
 
 const KeywordModal = ({openState, handleClose, modalArticle}) => {
     
@@ -45,60 +51,34 @@ const KeywordModal = ({openState, handleClose, modalArticle}) => {
           <h3 style={{textDecoration: 'underline', color: 'white'}}> 
             {modalArticle.title}
           </h3>
-              <Downshift
-                 onChange={selection => alert(`You selected ${selection.value}`)}
-                 itemToString={item => (item ? item.name : '')}
-              >
-                {
-                   ({
-                      getInputProps,
-      getItemProps,
-      getLabelProps,
-      getMenuProps,
-      isOpen,
-      inputValue,
-      highlightedIndex,
-      selectedItem,
-                     
-                   }) => {
-                     return <div style={{backgroundColor: "yellow"}}>
-                        <label {...getLabelProps()}>Add a keyword</label>
-                       <input {...getInputProps()} />
-                       <ul {...getMenuProps()}>
-          {isOpen
-            ? items
-                .filter(item => !inputValue || item.name.includes(inputValue))
-                .map((item, index) => (
-                  <li
-                    {...getItemProps({
-                      key: item.value,
-                      index,
-                      item,
-                      style: {
-                        backgroundColor:
-                          highlightedIndex === index ? 'lightgray' : 'white',
-                        fontWeight: selectedItem === item ? 'bold' : 'normal',
-                      },
-                    })}
-                  >
-                    {item.value}
-                  </li>
-                ))
-            : null}
-        </ul>
-                     </div>
-                   }
-                 }
-              </Downshift>
+           <Query query={KEYWORDS}>
+            {({loading, error, data}) => {
+                if (loading) return null
+                if (error) console.error(error)
+                const keywords = data.keywords
+                
+                
+                console.log(keywords)
+                
+                
+                
+                
+                
+                
+                
+                
+                return (
+                  <div>
+                    
+                  </div>
+                )
+                
+              }}     
+            </Query>
           <StyledInnerModal>
-              {(modalArticle.keywords && modalArticle.keywords.length > 0) ? <h4> Keywords </h4> : null}
-              {(modalArticle.keywords) ? 
-                  
-                  modalArticle.keywords.map(keyword => <div key={keyword.id}> {keyword.name} </div>) 
-                : null
-              }
+             
               <h2>Keywords</h2>
-              <Keywords />
+             
           </StyledInnerModal>
           
         </StyledModal>
