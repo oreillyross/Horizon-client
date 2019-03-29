@@ -5,6 +5,8 @@ import Keywords from '../pages/Keywords'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import Autosuggest from 'react-autosuggest';
+import KeywordModalTheme from './KeywordModal.module.css'
+import TextField from '@material-ui/core/TextField';
 
 const KEYWORDS = gql`
   query {
@@ -14,6 +16,7 @@ const KEYWORDS = gql`
       }
   }
 `
+
 
 const StyledModal = styled.div`
     width: 50%;
@@ -41,6 +44,29 @@ const StyledInnerModal = styled.div`
 
 const KeywordModal = ({openState, handleClose, modalArticle}) => {
     
+   const [value, setValue] = React.useState('')
+   const [suggestions, setSuggestions] = React.useState([])  
+   const [keywords, setKeywords] = React.useState([])
+   
+   const onSuggestionsFetchRequested = ({ value }) => {
+      setSuggestions(getSuggestions(value))
+    }
+                
+    const onSuggestionsClearRequested = () => {
+      setSuggestions([])
+    }
+                
+    const onChange = (event, { newValue }) => {
+      setValue(newValue);
+    };
+    
+    const getSuggestions = value => {
+                  const inputValue = value.trim().toLowerCase()
+                  const inputLength = inputValue.length
+                  
+                  return inputLength === 0 ? [] : keywords.filter(keyword => 
+                  keyword.name.toLowerCase().slice(0, inputLength) === inputValue)
+                }
     
    return (
       <Modal
@@ -56,20 +82,46 @@ const KeywordModal = ({openState, handleClose, modalArticle}) => {
                 if (loading) return null
                 if (error) console.error(error)
                 const keywords = data.keywords
+                setKeywords(keywords)
                 
                 
-                console.log(keywords)
+                const getSuggestionValue = suggestion => suggestion.name;
                 
+                const renderSuggestion = suggestion => (
+                  <div>
+                   {suggestion.name}
+                  </div>
+                );
                 
+               
+                const inputProps = {
+                  placeholder: 'Type a keyword',
+                  value,
+                  onChange: onChange
+                };
                 
-                
-                
-                
-                
+                const renderInputComponent = () => {
+                  return (
+                    <TextField
+                      fullWidth
+                    />
+                    
+                  )
+                }
                 
                 return (
                   <div>
-                    
+                    <Autosuggest
+                      suggestions={suggestions}
+                      onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+                      onSuggestionsClearRequested={onSuggestionsClearRequested}
+                      getSuggestionValue={getSuggestionValue}
+                      renderInputComponent={renderInputComponent}
+                      renderSuggestion={renderSuggestion}
+                      inputProps={inputProps}
+                      theme={KeywordModalTheme}
+                    >
+                    </Autosuggest>
                   </div>
                 )
                 

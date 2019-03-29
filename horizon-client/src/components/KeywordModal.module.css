@@ -1,0 +1,29 @@
+/* KeywordModalTheme.css */
+
+.container: {
+  color: green;
+}
+
+.containeropen: {
+  background-color: red;
+}
+
+.input: {
+  background-color: red;
+}
+
+/*  .inputOpen: {}
+  .inputFocused:    {}
+  .suggestionsContainer: {
+      font-size: larger;
+  }
+  .suggestionsContainerOpen: {}
+  .suggestionsList: {}
+  .suggestion: {}
+  .suggestionFirst: {}
+  .suggestionHighlighted: {}
+  .sectionContainer: {}
+  .sectionContainerFirst: {}
+  .sectionTitle: {}
+
+*/

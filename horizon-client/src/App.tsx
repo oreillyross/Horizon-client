@@ -10,10 +10,16 @@ import Articles from './pages/Articles'
 import NotFound from './pages/NotFound'
 import Keywords from './pages/Keywords'
 import { Route, Switch } from 'react-router-dom'  
+import TextAutoComplete from './components/TextAutoComplete'
 
+const keywords = [
+  {name: 'apple'},
+  {name: 'pear'},
+  {name: 'orange'},
+  {name: 'grape'},
+  {name: 'banana'},
+]
 
-
-const Home = () => null
 
 function App( props ) {
   
@@ -25,7 +31,7 @@ function App( props ) {
     <Header  />   
     <SubHeader />
     <Switch>
-      <Route exact path='/' component={Home} />
+      <Route exact path='/' render={(props) => <TextAutoComplete  {...props} suggestedItems={keywords}/>} />
       <Route path='/scenarios' component={Scenarios} />
       <Route path='/articles' component={Articles} />
       <Route path='/keywords' component={Keywords} />
