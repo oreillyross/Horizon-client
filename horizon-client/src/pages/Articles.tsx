@@ -2,23 +2,8 @@ import * as React from 'react'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import ExportTable from '../components/ExportTable'
+import { ARTICLES } from '../data/articles'
 
-const ARTICLES = gql`
-  query {
-    articles(orderBy: date_DESC) {
-      title
-      description
-      date
-      href
-      id
-      read
-      keywords {
-        id
-        name
-      }
-    }
-  }
-`
 
 
 const Articles = () => {

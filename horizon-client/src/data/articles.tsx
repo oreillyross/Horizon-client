@@ -1,5 +1,28 @@
 import faker from 'faker'
 import moment from 'moment'
+import gql from 'graphql-tag'
+
+export const ARTICLES = gql`
+  query {
+    articles(orderBy: date_DESC) {
+      title
+      description
+      date
+      href
+      id
+      read
+      keywords {
+        id
+        name
+      }
+    }
+  }
+`
+
+
+
+
+
 
 interface Article {
     date: string,
