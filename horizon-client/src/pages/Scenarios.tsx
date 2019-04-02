@@ -1,5 +1,6 @@
 import * as React from 'react'
 import ScenariosList from '../components/ScenariosList'
+import ScenariosQuickAddForm from '../forms/ScenariosQuickAddForm'
 
 const Scenarios = () => {
     return (
@@ -8,7 +9,7 @@ const Scenarios = () => {
          <ScenariosList/> 
         </div>
         <div>
-          ScenariosForm - open with a chevron sign  
+          <ScenariosQuickAddForm/>  
         </div>
       </div>
       
