@@ -21,21 +21,9 @@ export const SCENARIOS = gql`
 `;
 
 export const ADD_SCENARIO = gql`
-  mutation createScenario($name: String, $description: String) {
-    createScenario(data: { name: $name, description: $description }) {
-      id
+  mutation createScenario($name: String) {
+    createScenario(data: { name: $name }) {
       name
-      description
-      indicators {
-        id
-        name
-        description
-        keywords {
-          id
-          name
-          description
-        }
-      }
     }
   }
 `;
