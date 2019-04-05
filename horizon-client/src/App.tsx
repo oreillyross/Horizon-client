@@ -29,6 +29,7 @@ function App(props) {
           )}
         />
         <Route path="/scenarios" component={Scenarios} />
+        <Route path="/forms/scenario/:id" component={ScenarioForm} />
         <Route path="/forms/scenario" component={ScenarioForm} />
         <Route path="/articles" component={Articles} />
         <Route path="/keywords" component={Keywords} />

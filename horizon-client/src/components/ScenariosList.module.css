@@ -1,0 +1,26 @@
+.container {
+  border: 1px solid Gainsboro;
+  margin: 1rem;
+  padding: 0.5rem;
+}
+
+.container:hover {
+  background-color: Gainsboro;
+}
+
+.scenario__row {
+  text-align: left;
+  vertical-align: baseline;
+}
+
+.scenario__delete {
+  text-align: right;
+}
+
+.link {
+  color: #fff;
+}
+
+.link:hover {
+  color: #00f;
+}
