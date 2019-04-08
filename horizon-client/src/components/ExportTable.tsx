@@ -1,150 +1,154 @@
-import React, {useState} from 'react'
-import XLSX from 'xlsx'
-import  styled  from 'styled-components'
-import moment from 'moment'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Mutation } from 'react-apollo'
-import gql from 'graphql-tag'
-import './ExportTable.css'
-import KeywordModal from './KeywordModal'
+import React, { useState } from "react";
+import XLSX from "xlsx";
+import styled from "styled-components";
+import moment from "moment";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Mutation } from "react-apollo";
+import gql from "graphql-tag";
+import "./ExportTable.css";
+import KeywordModal from "./KeywordModal";
 
 const writeTheFile = () => {
-  let table = document.querySelector('#article_table')
-  let wb = XLSX.utils.table_to_book(table)
-  XLSX.writeFile(wb, 'articles.xlsx')
-  
-}
+  let table = document.querySelector("#events_table");
+  let wb = XLSX.utils.table_to_book(table);
+  XLSX.writeFile(wb, "events.xlsx");
+};
 
 const UPDATE_READ = gql`
   mutation updateread($read: Boolean, $id: ID) {
-  updateArticle(where: {id: $id}, data: {read: $read} ) {
-    id
-    read
+    updateEvent(where: { id: $id }, data: { read: $read }) {
+      id
+      read
+    }
   }
-}
-`
+`;
 
-const DELETE_ARTICLE = gql`
-  mutation deleteArticle($id: ID) {
-   deleteArticle(where: {id: $id}) {
-    id
-    title
+const DELETE_EVENT = gql`
+  mutation deleteEvent($id: ID) {
+    deleteEvent(where: { id: $id }) {
+      id
+      title
+    }
   }
-}
-`
+`;
 
 const StyledTags = styled.div`
   margin-top: 0.5em;
   text-align: center;
-`
+`;
 
-const ArticleRow = ({article, onRemove, onTagModal}) => {
-  
-  const [read, setToggle] = useState(article.read) 
-  
-  const toggleRead = (id) => {
-    setToggle(!read)
-  }
-  
-  const readIcon = (read) ? 'envelope-open' : 'envelope'
-  const readColor = (read) ? 'SlateBlue' : 'SteelBlue'
-  
+const EventRow = ({ event, onRemove, onTagModal }) => {
+  const [read, setToggle] = useState(event.read);
+
+  const toggleRead = id => {
+    setToggle(!read);
+  };
+
+  const readIcon = read ? "envelope-open" : "envelope";
+  const readColor = read ? "SlateBlue" : "SteelBlue";
+
   return (
-    
-    <tr className='border_bottom' key={article.id}> 
-          <td>
-          <Mutation mutation={UPDATE_READ}>
-            {(updateRead, {data})=> {
-              return (
-                <span style={{padding: '8px'}} onClick={() => {
-                  toggleRead(!read)
-                  updateRead({variables: {id: article.id, read: !read }})
-                  
-                }}>
-                  <FontAwesomeIcon icon={readIcon} style={{color: readColor}}/>
-                </span>  
-            )
-            }}
-            
-          </Mutation>  
-          </td>
-          <td style={{width: '12%'}}> {(article.date) ? moment(article.date).format('LLL') : new Date().toUTCString()}</td>
-          <td style={{width: '30%', valign: 'top'}}> {article.title}</td>
-          <td style={{width: '50%'}}> {article.description}</td>
-          <td style={{width: '4%'}}> {article.href}</td>
-          <td>
-            <div>
-              <Mutation mutation={DELETE_ARTICLE}>
-                {(deleteArticle, { data }) => {
-                  return (  <span onClick={() => {
-                    deleteArticle({variables: {id: article.id}})
-                    onRemove(article.id)  
-                  }}>
-                               <FontAwesomeIcon icon='trash' />
-                            </span>  
-                          )
+    <tr className="border_bottom" key={event.id}>
+      <td>
+        <Mutation mutation={UPDATE_READ}>
+          {(updateRead, { data }) => {
+            return (
+              <span
+                style={{ padding: "8px" }}
+                onClick={() => {
+                  toggleRead(!read);
+                  updateRead({ variables: { id: event.id, read: !read } });
                 }}
-                
-              </Mutation>  
-                
-            </div>
-            <StyledTags>
-              <span onClick={() => onTagModal(article)}>
-                <FontAwesomeIcon icon='tags' />
-              </span>  
-            </StyledTags>
-          </td>
-    </tr>  
-  )
-}
+              >
+                <FontAwesomeIcon icon={readIcon} style={{ color: readColor }} />
+              </span>
+            );
+          }}
+        </Mutation>
+      </td>
+      <td style={{ width: "12%" }}>
+        {" "}
+        {event.date
+          ? moment(event.date).format("LLL")
+          : new Date().toUTCString()}
+      </td>
+      <td style={{ width: "30%", valign: "top" }}> {event.title}</td>
+      <td style={{ width: "50%" }}> {event.description}</td>
+      <td style={{ width: "4%" }}> {event.href}</td>
+      <td>
+        <div>
+          <Mutation mutation={DELETE_EVENT}>
+            {(deleteEvent, { data }) => {
+              return (
+                <span
+                  onClick={() => {
+                    deleteEvent({ variables: { id: event.id } });
+                    onRemove(event.id);
+                  }}
+                >
+                  <FontAwesomeIcon icon="trash" />
+                </span>
+              );
+            }}
+          </Mutation>
+        </div>
+        <StyledTags>
+          <span onClick={() => onTagModal(event)}>
+            <FontAwesomeIcon icon="tags" />
+          </span>
+        </StyledTags>
+      </td>
+    </tr>
+  );
+};
 
+const ExportTable = ({ events, onRemove }) => {
+  const [modalOpen, setModalOpen] = React.useState(false);
+  const [modalEvent, setModalEvent] = React.useState({});
 
-const ExportTable = ({articles, onRemove}) => {
-  
-  const [modalOpen, setModalOpen] = React.useState(false)
-  const [modalArticle, setModalArticle] = React.useState({})
-   
-  const openModal = (article) => {
-    setModalArticle(article)
-    setModalOpen(true)
-  }
-  
+  const openModal = event => {
+    setModalEvent(event);
+    setModalOpen(true);
+  };
+
   const closeModal = () => {
-    setModalOpen(false)
-  }
-  
+    setModalOpen(false);
+  };
 
-  
   return (
-      <div style={{paddingTop: '2em'}}>
-        <KeywordModal modalArticle={modalArticle} openState={modalOpen} handleClose={closeModal}/>
-        <table id='article_table'>
+    <div style={{ paddingTop: "2em" }}>
+      <KeywordModal
+        modalEvent={modalEvent}
+        openState={modalOpen}
+        handleClose={closeModal}
+      />
+      <table id="events_table">
         <tbody>
-        <tr style={{textAlign: 'left'}}>
-          <th>Read</th>
-          <th>Date</th>
-          <th>Title</th>
-          <th> Description </th>
-          <th> Hyperlink </th>
-        </tr>
-        
-       {articles.map(a => {
-        
-         return (
-           (<ArticleRow key={a.id} onRemove={onRemove} article={a} onTagModal={openModal} />))}
-         )
-       }
-       
-       
-        
-        </tbody>
-        </table>
-      <div> 
-      <button onClick={writeTheFile}>Export Data</button> 
-      </div>
-      </div>
-      
-    );
-}
+          <tr style={{ textAlign: "left" }}>
+            <th>Read</th>
+            <th>Date</th>
+            <th>Title</th>
+            <th> Description </th>
+            <th> Hyperlink </th>
+          </tr>
 
-export default ExportTable
+          {events.map(a => {
+            return (
+              <EventRow
+                key={a.id}
+                onRemove={onRemove}
+                event={a}
+                onTagModal={openModal}
+              />
+            );
+          })}
+        </tbody>
+      </table>
+      <div>
+        <button onClick={writeTheFile}>Export Data</button>
+      </div>
+    </div>
+  );
+};
+
+export default ExportTable;

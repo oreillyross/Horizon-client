@@ -2,3 +2,8 @@ h2 {
   padding: 0.8rem;
   text-align: left;
 }
+
+.submitButton {
+  color: red;
+  margin: 0.8rem;
+}

@@ -14,9 +14,9 @@ const SubHeader = () => {
   return (
     <StyledSubHeader>
       Home {} / {}
-      <Link to="/scenarios">Scenarios</Link> / Indicators /
-      <Link to="/articles">Articles</Link> /
-      <Link to="/keywords"> Keywords </Link>
+      <Link to="/scenarios">Scenarios</Link> /
+      <Link to="/indicators">Indicators</Link> /<Link to="/events">Events</Link>{" "}
+      /<Link to="/keywords"> Keywords </Link>
     </StyledSubHeader>
   );
 };
