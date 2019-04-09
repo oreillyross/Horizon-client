@@ -35,6 +35,7 @@ function App(props) {
         <Route path="/scenarios" component={Scenarios} />
         <Route path="/forms/scenario/:id" component={ScenarioForm} />
         <Route path="/forms/scenario" component={ScenarioForm} />
+        <Route path="/forms/indicator" component={IndicatorForm} />
         <Route path="/events" component={Events} />
         <Route path="/indicators" component={IndicatorList} />
         <Route path="/keywords" component={Keywords} />
