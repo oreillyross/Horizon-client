@@ -2,8 +2,10 @@ import React from "react";
 import styled from "styled-components";
 
 const StyledHeader = styled.h1`
-  color: Olive;
+  color: #2e8b57;
   padding-bottom: "3px";
+  text-align: center;
+  font-weight: bold;
 `;
 
 const Header = () => (

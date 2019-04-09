@@ -13,6 +13,7 @@ import { Route, Switch } from "react-router-dom";
 import TextAutoComplete from "./components/TextAutoComplete";
 import ScenarioForm from "./forms/ScenarioForm";
 import IndicatorForm from "./forms/IndicatorForm";
+import IndicatorList from "./lists/IndicatorList";
 import { Jumbotron } from "reactstrap";
 
 const keywords = [];
@@ -22,24 +23,23 @@ function App(props) {
     <div className="App">
       <Header />
       <SubHeader />
-      <Jumbotron>
-        <Switch>
-          <Route
-            exact
-            path="/"
-            render={props => (
-              <TextAutoComplete {...props} suggestedItems={keywords} />
-            )}
-          />
-          <Route path="/scenarios" component={Scenarios} />
-          <Route path="/forms/scenario/:id" component={ScenarioForm} />
-          <Route path="/forms/scenario" component={ScenarioForm} />
-          <Route path="/events" component={Events} />
-          <Route path="/indicators" component={IndicatorForm} />
-          <Route path="/keywords" component={Keywords} />
-          <Route component={NotFound} />
-        </Switch>
-      </Jumbotron>
+
+      <Switch>
+        <Route
+          exact
+          path="/"
+          render={props => (
+            <TextAutoComplete {...props} suggestedItems={keywords} />
+          )}
+        />
+        <Route path="/scenarios" component={Scenarios} />
+        <Route path="/forms/scenario/:id" component={ScenarioForm} />
+        <Route path="/forms/scenario" component={ScenarioForm} />
+        <Route path="/events" component={Events} />
+        <Route path="/indicators" component={IndicatorList} />
+        <Route path="/keywords" component={Keywords} />
+        <Route component={NotFound} />
+      </Switch>
     </div>
   );
 }
