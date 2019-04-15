@@ -9,7 +9,7 @@ import { withStyles } from "@material-ui/core/styles";
 import red from "@material-ui/core/colors/red";
 import Icon from "@material-ui/core/Icon";
 import { Link } from "react-router-dom";
-import useHover from "../lib/use-hover";
+import IndicatorRow from "./IndicatorRow";
 
 const $container = styled.div`
   padding: 0.5rem;
@@ -24,8 +24,6 @@ const $h2 = styled.h2`
 
 const IndicatorList = props => {
   const [loading, setLoading] = React.useState(false);
-
-  const [hoverRef, isHovered] = useHover();
 
   return (
     <React.Fragment>
@@ -61,18 +59,7 @@ const IndicatorList = props => {
                   </thead>
                   <tbody>
                     {data.indicators.map((indicator, i) => (
-                      <tr
-                        className={styles.indicator}
-                        key={indicator.id}
-                        ref={hoverRef}
-                      >
-                        <th scope="row">{i + 1}</th>
-                        <td>{indicator.name}</td>
-                        <td>
-                          <div>edit icon</div>
-                          <div>garbage can</div>
-                        </td>
-                      </tr>
+                      <IndicatorRow indicator={indicator} i={i} />
                     ))}
                   </tbody>
                 </Table>
