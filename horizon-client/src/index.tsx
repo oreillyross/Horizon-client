@@ -14,7 +14,8 @@ import {
   faEnvelope,
   faEnvelopeOpen,
   faTags,
-  faTrash
+  faTrash,
+  faEdit
 } from "@fortawesome/free-solid-svg-icons";
 import { Router } from "react-router-dom";
 import { createBrowserHistory } from "history";
@@ -27,7 +28,7 @@ import { createBrowserHistory } from "history";
 
 const history = createBrowserHistory();
 
-library.add(faEnvelope, faEnvelopeOpen, faTags, faTrash);
+library.add(faEnvelope, faEnvelopeOpen, faTags, faTrash, faEdit);
 
 const client = new ApolloClient({
   uri: "https://horizon-server-oreillyross.c9users.io/"

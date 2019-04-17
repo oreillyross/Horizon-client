@@ -1,7 +1,7 @@
 import * as React from "react";
 import useHover from "react-use-hover";
-import styles from "./IndicatorList.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import styles from "./IndicatorRow.module.css";
 
 const IndicatorRow = ({ indicator, i }) => {
   const [isHovering, hoverProps] = useHover();
@@ -12,14 +12,14 @@ const IndicatorRow = ({ indicator, i }) => {
       <td>{indicator.name}</td>
       <td>
         <div>
-          {isHovering ? (
-            <React.Fragment>
-              <span>edit icon</span>
-              <span>
-                <FontAwesomeIcon icon="trash" />
-              </span>
-            </React.Fragment>
-          ) : null}
+          <React.Fragment>
+            <span className={styles.icons}>
+              <FontAwesomeIcon icon="edit" />
+            </span>
+            <span className={styles.icons}>
+              <FontAwesomeIcon icon="trash" />
+            </span>
+          </React.Fragment>
         </div>
       </td>
     </tr>
