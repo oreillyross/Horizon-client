@@ -2,14 +2,13 @@ import * as React from "react";
 import styled from "styled-components";
 import { Container, Row, Col, Jumbotron, Table, Spinner } from "reactstrap";
 import { Query, Mutation } from "react-apollo";
-import { INDICATORS } from "../data/indicators";
-import Indicator from "./Indicator";
-import styles from "./IndicatorList.module.css";
+import { SCENARIOS } from "../data/scenarios";
+import styles from "./ScenarioList.module.css";
 import { withStyles } from "@material-ui/core/styles";
 import red from "@material-ui/core/colors/red";
 import Icon from "@material-ui/core/Icon";
 import { Link } from "react-router-dom";
-import IndicatorRow from "./IndicatorRow";
+import ScenarioRow from "./ScenarioRow";
 
 const $container = styled.div`
   padding: 0.5rem;
@@ -22,29 +21,29 @@ const $h2 = styled.h2`
   font-weight: bold;
 `;
 
-const IndicatorList = props => {
+const ScenarioList = props => {
   const [loading, setLoading] = React.useState(false);
-  const [indicators, setIndicators] = React.useState([]);
+  const [scenarios, setScenarios] = React.useState([]);
 
-  function deleteIndicator(id) {
-    setIndicators(() => {
-      return indicators.filter(indicator => indicator.id !== id);
+  const removeScenario = id => {
+    setScenarios(() => {
+      return scenarios.filter(scenario => scenario.id !== id);
     });
-  }
+  };
 
   return (
     <React.Fragment>
       <$container className={styles.clearfix}>
         <Row>
           <Col md={12}>
-            <$h2> Indicator list </$h2>
+            <$h2> Scenario list </$h2>
           </Col>
         </Row>
 
         <Jumbotron
           style={{ margin: "1rem", borderRadius: "15px 50px 30px 5px" }}
         >
-          <Query query={INDICATORS}>
+          <Query query={SCENARIOS}>
             {({ loading, error, data }) => {
               setLoading(loading);
               if (loading)
@@ -56,21 +55,21 @@ const IndicatorList = props => {
                   </Row>
                 );
               if (error) return <div>Oops... something went wrong!</div>;
-              if (indicators.length === 0) setIndicators(data.indicators);
+              if (scenarios.length === 0) setScenarios(data.scenarios);
               return (
                 <Table bordered>
                   <thead>
                     <tr>
                       <th>#</th>
-                      <th>Indicator Name</th>
+                      <th>Scenario Name</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {indicators.map((indicator, i) => (
-                      <IndicatorRow
-                        key={indicator.id}
-                        onDelete={deleteIndicator}
-                        indicator={indicator}
+                    {scenarios.map((scenario, i) => (
+                      <ScenarioRow
+                        onDelete={removeScenario}
+                        key={scenario.id}
+                        scenario={scenario}
                         i={i}
                       />
                     ))}
@@ -82,7 +81,7 @@ const IndicatorList = props => {
         </Jumbotron>
 
         {loading ? null : (
-          <Link to="/forms/indicator">
+          <Link to="/forms/scenario">
             <Icon
               className={styles.iconHover}
               color="primary"
@@ -97,4 +96,4 @@ const IndicatorList = props => {
   );
 };
 
-export { IndicatorList as default };
+export { ScenarioList as default };

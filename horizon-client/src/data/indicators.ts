@@ -19,3 +19,12 @@ export const INDICATORS = gql`
     }
   }
 `;
+
+export const DELETE_INDICATOR = gql`
+  mutation deleteIndicator($id: ID!) {
+    deleteIndicator(where: { id: $id }) {
+      id
+      name
+    }
+  }
+`;

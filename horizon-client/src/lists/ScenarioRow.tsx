@@ -1,30 +1,30 @@
 import * as React from "react";
 import useHover from "react-use-hover";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "./IndicatorRow.module.css";
+import styles from "./ScenarioRow.module.css";
 import { Mutation } from "react-apollo";
-import { DELETE_INDICATOR } from "../data/indicators";
+import { DELETE_SCENARIO } from "../data/scenarios";
 
-const IndicatorRow = ({ indicator, i, onDelete }) => {
+const ScenarioRow = ({ scenario, i, onDelete }) => {
   const [isHovering, hoverProps] = useHover();
 
   return (
     <tr className={styles.indicator} {...hoverProps}>
       <th scope="row">{i + 1}</th>
-      <td>{indicator.name}</td>
+      <td>{scenario.name}</td>
       <td>
         <div>
           <React.Fragment>
             <span className={styles.icons}>
               <FontAwesomeIcon icon="edit" />
             </span>
-            <Mutation mutation={DELETE_INDICATOR}>
-              {deleteIndicator => {
+            <Mutation mutation={DELETE_SCENARIO}>
+              {deleteScenario => {
                 return (
                   <span
                     onClick={() => {
-                      deleteIndicator({ variables: { id: indicator.id } });
-                      onDelete(indicator.id);
+                      deleteScenario({ variables: { id: scenario.id } });
+                      onDelete(scenario.id);
                     }}
                     className={styles.icons}
                   >
@@ -40,4 +40,4 @@ const IndicatorRow = ({ indicator, i, onDelete }) => {
   );
 };
 
-export { IndicatorRow as default };
+export { ScenarioRow as default };

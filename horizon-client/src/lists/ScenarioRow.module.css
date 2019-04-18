@@ -1,0 +1,12 @@
+.emphasize {
+  font-weight: bold;
+}
+
+.icons {
+  padding: 10px;
+}
+
+.indicator:hover {
+  background-color: Gainsboro;
+  cursor: pointer;
+}

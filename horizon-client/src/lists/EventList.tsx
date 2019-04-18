@@ -2,14 +2,13 @@ import * as React from "react";
 import styled from "styled-components";
 import { Container, Row, Col, Jumbotron, Table, Spinner } from "reactstrap";
 import { Query, Mutation } from "react-apollo";
-import { INDICATORS } from "../data/indicators";
-import Indicator from "./Indicator";
-import styles from "./IndicatorList.module.css";
+import { EVENTS } from "../data/events";
+import styles from "./EventList.module.css";
 import { withStyles } from "@material-ui/core/styles";
 import red from "@material-ui/core/colors/red";
 import Icon from "@material-ui/core/Icon";
 import { Link } from "react-router-dom";
-import IndicatorRow from "./IndicatorRow";
+import EventRow from "./EventRow";
 
 const $container = styled.div`
   padding: 0.5rem;
@@ -22,29 +21,31 @@ const $h2 = styled.h2`
   font-weight: bold;
 `;
 
-const IndicatorList = props => {
+const EventList = props => {
   const [loading, setLoading] = React.useState(false);
-  const [indicators, setIndicators] = React.useState([]);
+  const [eventData, setEventData] = React.useState([]);
 
-  function deleteIndicator(id) {
-    setIndicators(() => {
-      return indicators.filter(indicator => indicator.id !== id);
-    });
-  }
+  const removeEvent = id => {
+    setEventData(
+      eventData.filter(event => {
+        return event.id !== id;
+      })
+    );
+  };
 
   return (
     <React.Fragment>
       <$container className={styles.clearfix}>
         <Row>
           <Col md={12}>
-            <$h2> Indicator list </$h2>
+            <$h2> Event list </$h2>
           </Col>
         </Row>
 
         <Jumbotron
           style={{ margin: "1rem", borderRadius: "15px 50px 30px 5px" }}
         >
-          <Query query={INDICATORS}>
+          <Query query={EVENTS}>
             {({ loading, error, data }) => {
               setLoading(loading);
               if (loading)
@@ -56,21 +57,22 @@ const IndicatorList = props => {
                   </Row>
                 );
               if (error) return <div>Oops... something went wrong!</div>;
-              if (indicators.length === 0) setIndicators(data.indicators);
+              if (eventData.length === 0) setEventData(data.events);
               return (
                 <Table bordered>
                   <thead>
                     <tr>
                       <th>#</th>
-                      <th>Indicator Name</th>
+                      <th>date</th>
+                      <th>title</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {indicators.map((indicator, i) => (
-                      <IndicatorRow
-                        key={indicator.id}
-                        onDelete={deleteIndicator}
-                        indicator={indicator}
+                    {eventData.map((event, i) => (
+                      <EventRow
+                        onDelete={removeEvent}
+                        key={event.id}
+                        event={event}
                         i={i}
                       />
                     ))}
@@ -82,7 +84,7 @@ const IndicatorList = props => {
         </Jumbotron>
 
         {loading ? null : (
-          <Link to="/forms/indicator">
+          <Link to="/forms/event">
             <Icon
               className={styles.iconHover}
               color="primary"
@@ -97,4 +99,4 @@ const IndicatorList = props => {
   );
 };
 
-export { IndicatorList as default };
+export { EventList as default };

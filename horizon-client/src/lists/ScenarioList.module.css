@@ -1,0 +1,21 @@
+.indicator:hover {
+  background-color: Gainsboro;
+  cursor: pointer;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.iconHover {
+  cursor: pointer;
+  float: right;
+  color: white;
+  margin-right: 5rem;
+}
+
+.iconHover:hover {
+  filter: brightness(85%);
+}
