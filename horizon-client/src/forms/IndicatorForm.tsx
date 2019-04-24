@@ -11,7 +11,6 @@ import {
   Input
 } from "reactstrap";
 import TextField from "@material-ui/core/TextField";
-import { TestBox } from "../tests/TestBox";
 import styled from "styled-components";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Query, Mutation } from "react-apollo";

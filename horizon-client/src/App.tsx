@@ -13,6 +13,7 @@ import TextAutoComplete from "./components/TextAutoComplete";
 import ScenarioForm from "./forms/ScenarioForm";
 import IndicatorForm from "./forms/IndicatorForm";
 import KeywordForm from "./forms/KeywordForm";
+import EventForm from "./forms/EventForm";
 import IndicatorList from "./lists/IndicatorList";
 import ScenarioList from "./lists/ScenarioList";
 import EventList from "./lists/EventList";
@@ -39,6 +40,7 @@ function App(props) {
         <Route path="/forms/scenario" component={ScenarioForm} />
         <Route path="/forms/keywords" component={KeywordForm} />
         <Route path="/forms/indicator" component={IndicatorForm} />
+        <Route path="/forms/event" component={EventForm} />
         <Route path="/events" component={EventList} />
         <Route path="/indicators" component={IndicatorList} />
         <Route path="/keywords" component={Keywords} />

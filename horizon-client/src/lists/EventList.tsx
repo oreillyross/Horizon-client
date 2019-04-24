@@ -41,7 +41,17 @@ const EventList = props => {
             <$h2> Event list </$h2>
           </Col>
         </Row>
-
+        {loading ? null : (
+          <Link to="/forms/event">
+            <Icon
+              className={styles.iconHover}
+              color="primary"
+              style={{ fontSize: 60 }}
+            >
+              add_circle
+            </Icon>
+          </Link>
+        )}
         <Jumbotron
           style={{ margin: "1rem", borderRadius: "15px 50px 30px 5px" }}
         >
@@ -82,18 +92,6 @@ const EventList = props => {
             }}
           </Query>
         </Jumbotron>
-
-        {loading ? null : (
-          <Link to="/forms/event">
-            <Icon
-              className={styles.iconHover}
-              color="primary"
-              style={{ fontSize: 60 }}
-            >
-              add_circle
-            </Icon>
-          </Link>
-        )}
       </$container>
     </React.Fragment>
   );
