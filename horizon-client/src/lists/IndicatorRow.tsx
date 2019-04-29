@@ -3,7 +3,7 @@ import useHover from "react-use-hover";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./IndicatorRow.module.css";
 import { Mutation } from "react-apollo";
-import { DELETE_INDICATOR } from "../data/indicators";
+import { DELETE_INDICATOR } from "../graphql/indicators";
 
 const IndicatorRow = ({ indicator, i, onDelete }) => {
   const [isHovering, hoverProps] = useHover();

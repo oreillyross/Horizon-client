@@ -2,14 +2,14 @@ import * as React from "react";
 import styled from "styled-components";
 import { Container, Row, Col, Jumbotron, Table, Spinner } from "reactstrap";
 import { Query, Mutation } from "react-apollo";
-import { EVENTS } from "../data/events";
+import { EVENTS } from "../graphql/events";
 import styles from "./EventList.module.css";
 import { withStyles } from "@material-ui/core/styles";
 import red from "@material-ui/core/colors/red";
 import Icon from "@material-ui/core/Icon";
 import { Link } from "react-router-dom";
 import EventRow from "./EventRow";
-import { Route } from 'react-router-dom'
+import { Route } from "react-router-dom";
 
 const $container = styled.div`
   padding: 0.5rem;
@@ -81,18 +81,20 @@ const EventList = props => {
                   <tbody>
                     {eventData.map((event, i) => (
                       <React.Fragment key={event.id}>
-                      <Route render={({history}) => {return (
-                          <EventRow
-                        onDelete={removeEvent}
-                        onClick={ () => {
-                          history.push('/forms/event')
-                        }}
-                        
-                        event={event}
-                        i={i}
-                      />
-                      )}}>
-                      </Route>
+                        <Route
+                          render={({ history }) => {
+                            return (
+                              <EventRow
+                                onDelete={removeEvent}
+                                onClick={() => {
+                                  history.push("/forms/event");
+                                }}
+                                event={event}
+                                i={i}
+                              />
+                            );
+                          }}
+                        />
                       </React.Fragment>
                     ))}
                   </tbody>

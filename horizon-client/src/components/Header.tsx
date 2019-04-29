@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components/macro";
-import tw from "tailwind.macro";
 
 const StyledHeader = styled.h1`
   color: #2e8b57;

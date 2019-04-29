@@ -1,9 +1,0 @@
-table {
-  border-collapse: collapse;
-}
-
-.border_bottom td {
-  border: 1px solid DarkBlue;
-  text-align: left;
-  padding: 8px;
-}

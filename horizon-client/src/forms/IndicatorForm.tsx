@@ -14,7 +14,7 @@ import TextField from "@material-ui/core/TextField";
 import styled from "styled-components";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Query, Mutation } from "react-apollo";
-import { ADD_INDICATOR } from "../data/indicators";
+import { ADD_INDICATOR } from "../graphql/indicators";
 import * as yup from "yup";
 
 const indicatorFormSchema = yup.object().shape({

@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import { Container, Row, Col, Jumbotron, Table, Spinner } from "reactstrap";
 import { Query, Mutation } from "react-apollo";
-import { SCENARIOS } from "../data/scenarios";
+import { SCENARIOS } from "../graphql/scenarios";
 import styles from "./ScenarioList.module.css";
 import { withStyles } from "@material-ui/core/styles";
 import red from "@material-ui/core/colors/red";

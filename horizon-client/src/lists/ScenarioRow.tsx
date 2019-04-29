@@ -3,7 +3,7 @@ import useHover from "react-use-hover";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./ScenarioRow.module.css";
 import { Mutation } from "react-apollo";
-import { DELETE_SCENARIO } from "../data/scenarios";
+import { DELETE_SCENARIO } from "../graphql/scenarios";
 
 const ScenarioRow = ({ scenario, i, onDelete }) => {
   const [isHovering, hoverProps] = useHover();

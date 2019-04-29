@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import { Container, Row, Col, Jumbotron, Table, Spinner } from "reactstrap";
 import { Query, Mutation } from "react-apollo";
-import { INDICATORS } from "../data/indicators";
+import { INDICATORS } from "../graphql/indicators";
 import Indicator from "./Indicator";
 import styles from "./IndicatorList.module.css";
 import { withStyles } from "@material-ui/core/styles";

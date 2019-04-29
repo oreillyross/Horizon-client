@@ -18,7 +18,7 @@ import {
   UPDATE_SCENARIO,
   SCENARIOS,
   SCENARIO_BY_ID
-} from "../data/scenarios";
+} from "../graphql/scenarios";
 
 const ScenarioForm = ({ history, scenario }) => {
   const initialValues = scenario

@@ -3,9 +3,8 @@ import useHover from "react-use-hover";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./EventRow.module.css";
 import { displayDate } from "../lib/displayDate";
-import { REMOVE_EVENT } from "../data/events";
+import { REMOVE_EVENT } from "../graphql/events";
 import { Mutation } from "react-apollo";
-
 
 const EventRow = ({ event, i, onDelete, onClick }) => {
   const [isHovering, hoverProps] = useHover();
@@ -13,10 +12,10 @@ const EventRow = ({ event, i, onDelete, onClick }) => {
   return (
     <tr className={styles.indicator} {...hoverProps}>
       <th scope="row">{i + 1}</th>
-       <span onClick={onClick}>      
+      <span onClick={onClick}>
         <td>{displayDate(event.date)}</td>
         <td>{event.title}</td>
-       </span>
+      </span>
       <td>
         <div>
           <React.Fragment>
