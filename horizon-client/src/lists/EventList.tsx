@@ -9,6 +9,7 @@ import red from "@material-ui/core/colors/red";
 import Icon from "@material-ui/core/Icon";
 import { Link } from "react-router-dom";
 import EventRow from "./EventRow";
+import { Route } from 'react-router-dom'
 
 const $container = styled.div`
   padding: 0.5rem;
@@ -79,12 +80,20 @@ const EventList = props => {
                   </thead>
                   <tbody>
                     {eventData.map((event, i) => (
-                      <EventRow
+                      <React.Fragment key={event.id}>
+                      <Route render={({history}) => {return (
+                          <EventRow
                         onDelete={removeEvent}
-                        key={event.id}
+                        onClick={ () => {
+                          history.push('/forms/event')
+                        }}
+                        
                         event={event}
                         i={i}
                       />
+                      )}}>
+                      </Route>
+                      </React.Fragment>
                     ))}
                   </tbody>
                 </Table>

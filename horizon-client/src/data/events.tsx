@@ -2,6 +2,8 @@ import faker from "faker";
 import moment from "moment";
 import gql from "graphql-tag";
 
+
+
 export const EVENTS = gql`
   query {
     events(orderBy: date_DESC) {

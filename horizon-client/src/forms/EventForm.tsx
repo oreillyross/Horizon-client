@@ -1,6 +1,8 @@
 import * as React from "react";
 
-const EventForm = () => {
+
+
+const EventForm = ({id}) => {
   return <div>Event Form</div>;
 };
 
