@@ -6,13 +6,13 @@ import { displayDate } from "../lib/displayDate";
 import { REMOVE_EVENT } from "../graphql/events";
 import { Mutation } from "react-apollo";
 
-const EventRow = ({ event, i, onDelete, onClick }) => {
+const EventRow = ({ event, i, onDelete }) => {
   const [isHovering, hoverProps] = useHover();
 
   return (
     <tr className={styles.indicator} {...hoverProps}>
       <th scope="row">{i + 1}</th>
-      <span onClick={onClick}>
+      <span>
         <td>{displayDate(event.date)}</td>
         <td>{event.title}</td>
       </span>

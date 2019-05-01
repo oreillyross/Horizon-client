@@ -35,7 +35,7 @@ const EventList = props => {
   };
 
   return (
-    <React.Fragment>
+    <>
       <$container className={styles.clearfix}>
         <Row>
           <Col md={12}>
@@ -86,9 +86,6 @@ const EventList = props => {
                             return (
                               <EventRow
                                 onDelete={removeEvent}
-                                onClick={() => {
-                                  history.push("/forms/event");
-                                }}
                                 event={event}
                                 i={i}
                               />
@@ -104,7 +101,7 @@ const EventList = props => {
           </Query>
         </Jumbotron>
       </$container>
-    </React.Fragment>
+    </>
   );
 };
 

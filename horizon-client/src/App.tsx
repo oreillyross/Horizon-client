@@ -18,8 +18,9 @@ import EventForm from "./forms/EventForm";
 import IndicatorList from "./lists/IndicatorList";
 import ScenarioList from "./lists/ScenarioList";
 import EventList from "./lists/EventList";
+import { Events } from "./pages/Events";
 
-function App(props) {
+function App() {
   return (
     <div className="App">
       <Header />
@@ -31,8 +32,8 @@ function App(props) {
         <Route path="/forms/keywords" component={KeywordForm} />
         <Route path="/forms/indicator" component={IndicatorForm} />
         <Route path="/forms/event" component={EventForm} />
-
-        <Route path="/events" component={EventList} />
+        <Route path="/pages/event" component={Event} />
+        <Route path="/events" render={() => <Events />} />
         <Route path="/indicators" component={IndicatorList} />
 
         <Route component={NotFound} />
