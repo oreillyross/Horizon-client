@@ -13,7 +13,6 @@ import NotFound from "./pages/NotFound";
 import ScenarioForm from "./forms/ScenarioForm";
 import IndicatorForm from "./forms/IndicatorForm";
 import KeywordForm from "./forms/KeywordForm";
-import EventForm from "./forms/EventForm";
 
 import IndicatorList from "./lists/IndicatorList";
 import ScenarioList from "./lists/ScenarioList";
@@ -30,7 +29,6 @@ function App() {
         <Route path="/forms/scenario" component={ScenarioForm} />
         <Route path="/forms/keywords" component={KeywordForm} />
         <Route path="/forms/indicator" component={IndicatorForm} />
-        <Route path="/forms/event" component={EventForm} />
         <Route path="/pages/event" component={Event} />
         <Route path="/events" render={() => <Events />} />
         <Route path="/indicators" component={IndicatorList} />
