@@ -17,7 +17,6 @@ import EventForm from "./forms/EventForm";
 
 import IndicatorList from "./lists/IndicatorList";
 import ScenarioList from "./lists/ScenarioList";
-import EventList from "./lists/EventList";
 import { Events } from "./pages/Events";
 
 function App() {

@@ -32,7 +32,8 @@
     "reactstrap": "^7.1.0",
     "reactstrap-formik": "^1.0.9",
     "semantic-ui-react": "^0.86.0",
-    "styled-components": "^4.2.0"
+    "styled-components": "^4.2.0",
+    "typescript": "^3.4.5"
   },
   "scripts": {
     "start": "react-scripts start",

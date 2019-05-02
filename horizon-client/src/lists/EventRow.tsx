@@ -4,39 +4,23 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./EventRow.module.css";
 import { displayDate } from "../lib/displayDate";
 import { REMOVE_EVENT } from "../graphql/events";
-import { Mutation } from "react-apollo";
 
-const EventRow = ({ event, i, onDelete }) => {
+const EventRow = ({ event, i, onTitleClick }) => {
   const [isHovering, hoverProps] = useHover();
 
   return (
     <tr className={styles.indicator} {...hoverProps}>
       <th scope="row">{i + 1}</th>
-      <span>
-        <td>{displayDate(event.date)}</td>
-        <td>{event.title}</td>
-      </span>
+      <td>{displayDate(event.date)}</td>
+      <td>
+        <span onClick={() => onTitleClick(event.id)}>{event.title}</span>
+      </td>
       <td>
         <div>
           <React.Fragment>
             <span className={styles.icons}>
               <FontAwesomeIcon icon="edit" />
             </span>
-            <Mutation mutation={REMOVE_EVENT}>
-              {deleteEvent => {
-                return (
-                  <span
-                    onClick={() => {
-                      onDelete(event.id);
-                      deleteEvent({ variables: { id: event.id } });
-                    }}
-                    className={styles.icons}
-                  >
-                    <FontAwesomeIcon icon="trash" />
-                  </span>
-                );
-              }}
-            </Mutation>
           </React.Fragment>
         </div>
       </td>

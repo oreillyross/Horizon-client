@@ -11,6 +11,20 @@ import { Link } from "react-router-dom";
 import EventRow from "./EventRow";
 import { Route } from "react-router-dom";
 
+type IEvents = {
+  id: string;
+  title: string;
+  source: string;
+  description: string;
+  date: Date;
+  href: string;
+};
+
+interface EventContainerProps {
+  onTitleClick: object;
+  events: Array<IEvents>;
+}
+
 const $container = styled.div`
   padding: 0.5rem;
 `;
@@ -22,18 +36,7 @@ const $h2 = styled.h2`
   font-weight: bold;
 `;
 
-const EventList = props => {
-  const [loading, setLoading] = React.useState(false);
-  const [eventData, setEventData] = React.useState([]);
-
-  const removeEvent = id => {
-    setEventData(
-      eventData.filter(event => {
-        return event.id !== id;
-      })
-    );
-  };
-
+const EventList = (props: EventContainerProps) => {
   return (
     <>
       <$container className={styles.clearfix}>
@@ -42,67 +45,40 @@ const EventList = props => {
             <$h2> Event list </$h2>
           </Col>
         </Row>
-        {loading ? null : (
-          <Link to="/forms/event">
-            <Icon
-              className={styles.iconHover}
-              color="primary"
-              style={{ fontSize: 60 }}
-            >
-              add_circle
-            </Icon>
-          </Link>
-        )}
+
         <Jumbotron
           style={{ margin: "1rem", borderRadius: "15px 50px 30px 5px" }}
         >
-          <Query query={EVENTS}>
-            {({ loading, error, data }) => {
-              setLoading(loading);
-              if (loading)
-                return (
-                  <Row>
-                    <Col md={12} style={{ textAlign: "center" }}>
-                      <Spinner color="success" />
-                    </Col>
-                  </Row>
-                );
-              if (error) return <div>Oops... something went wrong!</div>;
-              if (eventData.length === 0) setEventData(data.events);
-              return (
-                <Table bordered>
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>date</th>
-                      <th>title</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {eventData.map((event, i) => (
-                      <React.Fragment key={event.id}>
-                        <Route
-                          render={({ history }) => {
-                            return (
-                              <EventRow
-                                onDelete={removeEvent}
-                                event={event}
-                                i={i}
-                              />
-                            );
-                          }}
+          <Table bordered>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>date</th>
+                <th>title</th>
+              </tr>
+            </thead>
+            <tbody>
+              {props.events.map((event, i) => (
+                <React.Fragment key={event.id}>
+                  <Route
+                    render={({ history }) => {
+                      return (
+                        <EventRow
+                          onTitleClick={props.onTitleClick}
+                          event={event}
+                          i={i}
                         />
-                      </React.Fragment>
-                    ))}
-                  </tbody>
-                </Table>
-              );
-            }}
-          </Query>
+                      );
+                    }}
+                  />
+                </React.Fragment>
+              ))}
+            </tbody>
+          </Table>
         </Jumbotron>
       </$container>
     </>
   );
 };
 
-export { EventList as default };
+export { EventList };
