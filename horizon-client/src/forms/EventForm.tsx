@@ -32,10 +32,17 @@ const $input = styled.input`
 
 const $bodyText = styled.h3`
   text-align: justify;
-  padding: 20px;
   border: 1px solid grey;
   border-radius: 15px;
   background-color: LightYellow;
+  width: 100%;
+  height: 200px;
+`;
+
+const $textarea = styled.textarea`
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
 `;
 
 function EventForm({ event }) {
@@ -60,7 +67,9 @@ function EventForm({ event }) {
         </a>{" "}
       </$date>
       <h4>Source: {event.source}</h4>
-      <$bodyText>{event.description}</$bodyText>
+      <$bodyText>
+        <$textarea defaultValue={event.description} className="inherit" />
+      </$bodyText>
     </$container>
   );
 }
